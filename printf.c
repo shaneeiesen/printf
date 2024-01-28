@@ -33,12 +33,14 @@ int _printf(const char *format, ...)
 					{
 						char *str = va_arg(args, char *);
 
-						while (*str)
+						if (str != NULL)
 						{
-							putchar(*str++);
-							count++;
+							while (*str)
+							{
+								putchar(*str++);
+								count++;
+							}
 						}
-						break;
 					}
 				case '%':
 					{
