@@ -10,43 +10,47 @@
 int _printf(const char *format, ...) {
     int count = 0;
     va_list args;
+
     va_start(args, format);
 
-    for (const char *p = format; *p != '\0'; p++) {
-        if (*p != '%') {
-            fputc(*p, stdout);
-            count++;
-            continue;
-        }
-
-        switch (*++p) {
-            case 'c': ;
-                char c = (char) va_arg(args, int);
-                fputc(c, stdout);
-                count++;
-                break;
-            case 's': ;
-                const char *s = va_arg(args, char*);
-                if (s == NULL) {
-                    s = "(null)";
-                }
-                for (const char *str = s; *str != '\0'; str++) {
-                    fputc(*str, stdout);
+    while (*format) {
+        if (*format == '%') {
+            format++;
+            switch (*format) {
+                case 'c': {
+                    char c = va_arg(args, int);
+                    putchar(c);
                     count++;
+                    break;
                 }
-                break;
-            case '%':
-                fputc('%', stdout);
-                count++;
-                break;
-            default:
-                fputc('%', stdout);
-                fputc(*p, stdout);
-                count += 2;
-                break;
+                case 's': {
+                    char *str = va_arg(args, char *);
+                    while (*str) {
+                        putchar(*str++);
+                        count++;
+                    }
+                    break;
+                }
+                case '%': {
+                    putchar('%');
+                    count++;
+                    break;
+                }
+                default: {
+                    // Handle invalid conversion specifiers
+                    putchar(*format);
+                    count++;
+                    break;
+                }
+            }
+        } else {
+            putchar(*format);
+            count++;
         }
+        format++;
     }
 
     va_end(args);
     return count;
 }
+
