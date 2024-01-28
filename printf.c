@@ -36,19 +36,18 @@ int _printf(const char *format, ...)
 					if (str != NULL)
 					{
 						while (*str)
-						{
+					{
 							putchar(*str++);
 							count++;
-						}
+					}
 					}
 					break;
 				}
 				case '%':
 				{
-				default:
+
 					putchar('%');
-					putchar('%');
-					count = 2;
+					count++;
 					break;
 				}
 				default:
