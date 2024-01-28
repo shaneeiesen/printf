@@ -24,6 +24,7 @@ int _printf(const char *format, ...)
 				case 'c':
 					{
 						char c = va_arg(args, int);
+
 						putchar(c);
 						count++;
 						break;
