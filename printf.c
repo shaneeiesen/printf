@@ -7,59 +7,46 @@
  * Return: 0
  */
 
-int _printf(const char *format, ...)
-{
-	int count = 0;
-	va_list args;
+int _printf(const char *format, ...) {
+    int count = 0;
+    va_list args;
+    va_start(args, format);
 
-	va_start(args, format);
-	char ch, next_ch;
+    for (const char *p = format; *p != '\0'; p++) {
+        if (*p != '%') {
+            fputc(*p, stdout);
+            count++;
+            continue;
+        }
 
-	while ((ch = *format++) != '\0')
-	{
-		if (ch != '%')
-		{
-			putchar(ch);
-			count++;
-		}
-		else
-		{
-			next_ch = *format++;
+        switch (*++p) {
+            case 'c': ;
+                char c = (char) va_arg(args, int);
+                fputc(c, stdout);
+                count++;
+                break;
+            case 's': ;
+                const char *s = va_arg(args, char*);
+                if (s == NULL) {
+                    s = "(null)";
+                }
+                for (const char *str = s; *str != '\0'; str++) {
+                    fputc(*str, stdout);
+                    count++;
+                }
+                break;
+            case '%':
+                fputc('%', stdout);
+                count++;
+                break;
+            default:
+                fputc('%', stdout);
+                fputc(*p, stdout);
+                count += 2;
+                break;
+        }
+    }
 
-			switch (next_ch)
-			{
-				case 'c':
-				{
-					char c = (char) va_arg(args, int);
-
-					putchar(c);
-					count++;
-					break;
-				}
-				case 's':
-
-				{
-					char *str = va_arg(args, char*);
-
-					while (*str != '\0')
-					{
-						putchar(*str++);
-						count++;
-					}
-					break;
-				}
-				case '%':
-					putchar('%');
-					count++;
-					break;
-				default:
-					putchar('%');
-					putchar(next_ch);
-					count += 2;
-					break;
-			}
-		}
-	}
-	va_end(args);
-	return (count);
+    va_end(args);
+    return count;
 }
