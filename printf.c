@@ -52,7 +52,7 @@ int _printf(const char *format, ...)
 				default:
 					putchar('%');
 					putchar(*format);
-					count += 2;
+					count++;
 					break;
 			}
 		}
