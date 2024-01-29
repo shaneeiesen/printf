@@ -1,21 +1,5 @@
 #include "main.h"
 
-int _putchar(char c)
-{
-    return (write(1, &c, 1));
-}
-
-int _putstr(char *s)
-{
-    int i = 0;
-    while (s[i] != '\0')
-    {
-        _putchar(s[i]);
-        i++;
-    }
-    return (i);
-}
-
 /**
  * _printf - function prototype
  *
@@ -48,19 +32,19 @@ int _printf(const char *format, ...)
 			{
 				case 'c':
 					c = va_arg(args, int);
-					_putchar(c);
+					putchar(c);
 					count++;
 					break;
 				case 's':
 					s = va_arg(args, char *);
-					count += _putstr(s);
+					count += putchar(s);
 					break;
 				case '%':
-					_putchar('%');
+					putchar('%');
 					count++;
 					break;
 				default:
-					_putchar(format[i]);
+					putchar(format[i]);
 					count++;
 					break;
 			}
