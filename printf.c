@@ -25,7 +25,7 @@ int _printf(const char *format, ...)
 				{
 					char c = va_arg(args, int);
 
-					putchair(c);
+					putchar(c);
 					count++;
 					break;
 				}
