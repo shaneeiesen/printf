@@ -3,53 +3,65 @@
 /**
  * _printf - function prototype
  *
- * @format: count number of agrs
- * Return: 0
+ * @format: agrs passed
+ * Return: always return 0
  */
 
 int _printf(const char *format, ...)
 {
-	int count = 0;
-	int i = 0;
+	unsigned int count = 0;
 	va_list args;
-	char *s;
-	char c;
-
+	
 	va_start(args, format);
 
-	while (format[0] != '\0')
+	while (*format != '\0')
 	{
-		if (format[i] != '%')
+		if (*format != '%')
 		{
-			putchar(format[i]);
+			_putchar(*format);
 			count++;
+			format++;
 		}
 		else
 		{
-			i++;
-
-			switch (format[i])
+			format++;
+			switch (*format)
 			{
 				case 'c':
-					c = va_arg(args, int);
-					putchar(c);
+				{
+					char c = va_arg(args, int);
+					_putchar(c);
 					count++;
 					break;
+				}
 				case 's':
-					s = va_arg(args, char *);
-					count += putchar(s);
+				{
+					char *str = va_arg(args, char *);
+					
+					while (*str)
+					{
+						_putchar(*str);
+						count++;
+						str++;
+					}
 					break;
+				}
 				case '%':
-					putchar('%');
+				{
+					_putchar('%');
 					count++;
 					break;
+				}
 				default:
-					putchar(format[i]);
-					count++;
+				{
+					_putchar('%');
+					_putchar(*format);
+					count += 2;
 					break;
+				}
 			}
+			format++;
 		}
-		i++;
 	}
 	va_end(args);
 	return (count);
