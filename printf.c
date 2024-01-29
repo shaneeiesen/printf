@@ -61,7 +61,7 @@ int _printf(const char *format, ...)
 					{
 						return (-1);
 					}
-					count +=2;
+					count += 2;
 					break;
 				}
 			}
