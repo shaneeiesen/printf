@@ -70,7 +70,7 @@ int _printf(const char *format, ...)
 		{
 			if (_putchar(*format) < 0)
 			{
-				return (1);
+				return (-1);
 			}
 			count++;
 		}
