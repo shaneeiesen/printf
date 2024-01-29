@@ -3,18 +3,18 @@
 /**
  * _printf - function prototype
  *
- * @format: args to pass
- * Return: 0
+ * @format: agrs passed
+ * Return: always return 0
  */
 
 int _printf(const char *format, ...)
 {
-	int count = 0;
+	unsigned int count = 0;
 	va_list args;
 
 	va_start(args, format);
 
-	while (*format)
+	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
@@ -23,40 +23,55 @@ int _printf(const char *format, ...)
 			{
 				case 'c':
 				{
-					char c = va_arg(args, int);
+					char ch = va_arg(args, int);
 
-					_putchar(c);
+					if (_putchar(ch) < 0)
+					{
+						return (-1);
+					}
 					count++;
 					break;
 				}
 				case 's':
 				{
-					char *str = va_arg(args, char *);
+					char *str = va_arg(args, char*);
 
 					while (*str)
 					{
-						_putchar(*str++);
+						if (_putchar(*str++) < 0)
+						{
+							return (-1);
+						}
 						count++;
 					}
-					break;
 				}
+					break;
 				case '%':
 				{
-					_putchar('%');
+					if (_putchar('%') < 0)
+					{
+						return (-1);
+					}
 					count++;
 					break;
 				}
 				default:
 				{
-					_putchar(*format);
-					count++;
+					if (_putchar('%') < 0 || _putchar(*format) < 0)
+					{
+						return (-1);
+					}
+					count += 2;
 					break;
 				}
 			}
 		}
 		else
 		{
-			_putchar(*format);
+			if (_putchar(*format) < 0)
+			{
+				return (-1);
+			}
 			count++;
 		}
 		format++;
@@ -64,4 +79,3 @@ int _printf(const char *format, ...)
 	va_end(args);
 	return (count);
 }
-
