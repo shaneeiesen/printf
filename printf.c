@@ -11,7 +11,7 @@ int _printf(const char *format, ...)
 {
 	unsigned int count = 0;
 	va_list args;
-	
+
 	va_start(args, format);
 
 	while (*format != '\0')
@@ -37,7 +37,7 @@ int _printf(const char *format, ...)
 				case 's':
 				{
 					char *str = va_arg(args, char *);
-					
+
 					while (*str)
 					{
 						_putchar(*str);
