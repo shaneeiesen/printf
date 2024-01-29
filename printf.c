@@ -14,7 +14,7 @@ int _printf(const char *format, ...)
 
 	va_start(args, format);
 
-	while (*format != '\0')
+while (*format != '\0')
 	{
 		if (*format != '%')
 		{
@@ -36,7 +36,7 @@ int _printf(const char *format, ...)
 				}
 				case 's':
 				{
-					char *str = va_arg(args, char *);
+					char *str = (char) va_arg(args, char *);
 
 					while (*str)
 					{
