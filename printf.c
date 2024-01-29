@@ -25,7 +25,7 @@ int _printf(const char *format, ...)
 				{
 					char c = va_arg(args, int);
 
-					putchar(c);
+					_putchar(c);
 					count++;
 					break;
 				}
@@ -37,7 +37,7 @@ int _printf(const char *format, ...)
 					{
 						while (*str)
 					{
-							putchar(*str++);
+							_putchar(*str++);
 							count++;
 					}
 					}
@@ -46,20 +46,20 @@ int _printf(const char *format, ...)
 				case '%':
 				{
 
-					putchar('%');
+					_putchar('%');
 					count++;
 					break;
 				}
 				default:
-					putchar('%');
-					putchar(*format);
+					_putchar('%');
+					_putchar(*format);
 					count += 2;
 					break;
 			}
 		}
 		else
 		{
-			putchar(*format);
+			_putchar(*format);
 			count++;
 		}
 		format++;
