@@ -10,8 +10,7 @@
 
 int _printf(const char *format, ...);
 int _putchar(char c);
-int _putstr(char *s);
-int _itoa(int num, char *buffer, int base);
+int print_number(int n);
 
 
 #endif

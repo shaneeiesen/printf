@@ -18,24 +18,12 @@ int _printf(const char *format, ...)
 	{
 		if (*format != '%')
 		{
-			_putchar(*format);
-			count++;
-			format++;
-		}
-		else
-		{
 			format++;
 			if (*format == 'd' || *format == 'i')
 			{
 				int num = va_arg(args, int);
-				char buffer[32];
-				int digits = _itoa(num, buffer, 10);
 
-				for (int i = 0; i < digits; ++i)
-				{
-					_putchar(buffer[i]);
-					count++;
-				}
+				count += print_number(num);
 			}
 			else
 			{
@@ -43,8 +31,13 @@ int _printf(const char *format, ...)
 				_putchar(*format);
 				count += 2;
 			}
-			format++;
 		}
+		else
+		{
+			_putchar(*format);
+			count++;
+		}
+		format++;
 	}
 	va_end(args);
 	return (count);
