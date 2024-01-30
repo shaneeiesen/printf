@@ -81,8 +81,7 @@ int print_non_printable(va_list args, char buffer[],
 		if (is_printable(input_str[str_index]))
 			buffer[str_index + buffer_offset] = input_str[str_index];
 		else
-			buffer_offset += append_hexa_code(input_str[str_index], 
-					buffer, str_index + buffer_offset);
+			buffer_offset += append_hexa_code(input_str[str_index], buffer, str_index + buffer_offset);
 		str_index++;
 	}
 
@@ -150,10 +149,8 @@ int print_rot13string(va_list args, char buffer[],
 	char *input_str;
 	unsigned int i, j;
 	int output_count = 0;
-	char normal_alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ
-		abcdefghijklmnopqrstuvwxyz";
-	char rot13_alphabet[] = "NOPQRSTUVWXYZABCDEFGHIJKLM
-		nopqrstuvwxyzabcdefghijklm";
+	char normal_alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char rot13_alphabet[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
 	input_str = va_arg(args, char *);
 	UNUSED(buffer);
