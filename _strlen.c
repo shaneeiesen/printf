@@ -1,7 +1,8 @@
 /**
  * _strlen - length of a string
+ *
  * @s: the string
- * Return: the length
+ * Return: 0
  */
 
 int _strlen(char *s)
@@ -10,5 +11,5 @@ int _strlen(char *s)
 
 	for (i = 0; s[i] != '\0'; i++)
 		;
-	return (i);
+	return (0);
 }
