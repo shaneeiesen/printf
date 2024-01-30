@@ -2,35 +2,35 @@
 
 /**
  * get_width - Calculates the width for printing
- * @format: Formatted string in which to print the arguments.
- * @i: List of arguments to be printed.
- * @list: list of arguments.
+ * @format: Formatted string in which to print the arguments
+ * @index: Index to keep track of the current position in the format string
+ * @args_list: List of arguments
  *
- * Return: width.
+ * Return: Width.
  */
-int get_width(const char *format, int *i, va_list list)
+int get_width(const char *format, int *index, va_list args_list)
 {
-	int curr_i;
+	int current_index;
 	int width = 0;
 
-	for (curr_i = *i + 1; format[curr_i] != '\0'; curr_i++)
+	for (current_index = *index + 1; format[current_index] != '\0'; current_index++)
 	{
-		if (is_digit(format[curr_i]))
+		if (is_digit(format[current_index]))
 		{
 			width *= 10;
-			width += format[curr_i] - '0';
+			width += format[current_index] - '0';
 		}
-		else if (format[curr_i] == '*')
+		else if (format[current_index] == '*')
 		{
-			curr_i++;
-			width = va_arg(list, int);
+			current_index++;
+			width = va_arg(args_list, int);
 			break;
 		}
 		else
 			break;
 	}
 
-	*i = curr_i - 1;
+	*index = current_index - 1;
 
-	return (width);
+	return width;
 }
